@@ -11,10 +11,12 @@ import {
   ExternalLink,
   X,
   LogOut,
+  Languages,
 } from 'lucide-react';
 import type { NotificationItem, Order, DetailedCustomer, Invoice, CatalogProduct } from '../../types/dashboard';
 import { GlobalSearchResults } from './GlobalSearchResults';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface HeaderProps {
   onOpenMobileSidebar: () => void;
@@ -50,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigateTab,
 }) => {
   const { user, logout } = useAuth();
+  const { language, toggleLanguage, t } = useLanguage();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
@@ -102,7 +105,7 @@ export const Header: React.FC<HeaderProps> = ({
               setSearchQuery(e.target.value);
               setSearchFocused(true);
             }}
-            placeholder="Search orders, clients, invoices, pages..."
+            placeholder={t('header.searchPlaceholder')}
             className="w-full rounded-xl border border-slate-200 bg-slate-50/60 py-2 pl-9 pr-16 text-sm text-slate-900 placeholder-slate-400 transition-all focus:border-indigo-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-indigo-500 dark:focus:bg-slate-900"
           />
           <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 gap-1.5">
@@ -144,13 +147,23 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right Controls */}
       <div className="flex items-center gap-2 sm:gap-3">
+        {/* Language Switcher Button */}
+        <button
+          onClick={toggleLanguage}
+          className="rounded-xl border border-slate-200/80 bg-white px-2.5 py-2 text-xs font-bold text-slate-700 shadow-2xs transition-all hover:bg-slate-100 hover:border-indigo-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 cursor-pointer flex items-center gap-1.5"
+          title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
+        >
+          <Languages className="h-4 w-4 text-indigo-500" />
+          <span className="tracking-wide">{language === 'ar' ? 'English' : 'العربية'}</span>
+        </button>
+
         {/* Quick Action Button */}
         <button
           onClick={onOpenQuickAction}
           className="hidden md:inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-semibold text-white shadow-xs shadow-indigo-600/30 transition-all hover:bg-indigo-700 hover:shadow-md hover:shadow-indigo-600/40 active:scale-98 cursor-pointer"
         >
           <Plus className="h-4 w-4" />
-          <span>New Action</span>
+          <span>{t('header.newAction')}</span>
         </button>
 
         {/* Theme Toggle Button */}
@@ -255,7 +268,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className="flex w-full items-center justify-between px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 text-start cursor-pointer"
                 >
-                  <span>My Profile & Account</span>
+                  <span>{t('header.myProfile')}</span>
                   <ExternalLink className="h-3 w-3 text-slate-400" />
                 </button>
                 <button
@@ -265,7 +278,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }}
                   className="flex w-full items-center justify-between px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 text-start cursor-pointer"
                 >
-                  Billing & Statements
+                  {t('header.billing')}
                 </button>
               </div>
               <div className="border-t border-slate-100 dark:border-slate-800 pt-1">
@@ -277,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="flex w-full items-center gap-2 px-4 py-2 text-start text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-950/30 cursor-pointer transition-colors"
                 >
                   <LogOut className="h-3.5 w-3.5" />
-                  <span>Sign Out</span>
+                  <span>{t('header.signOut')}</span>
                 </button>
               </div>
             </div>

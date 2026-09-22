@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { LanguageProvider } from './context/LanguageContext';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { QuickActionsModal } from './components/dashboard/QuickActionsModal';
@@ -284,9 +285,11 @@ function DashboardContent() {
 
 export function App() {
   return (
-    <AuthProvider>
-      <DashboardContent />
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <DashboardContent />
+      </AuthProvider>
+    </LanguageProvider>
   );
 }
 
