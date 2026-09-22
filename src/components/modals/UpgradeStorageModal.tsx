@@ -3,10 +3,8 @@ import {
   X,
   HardDrive,
   CheckCircle2,
-  Zap,
   ShieldCheck,
   ArrowRight,
-  Sparkles,
   Server,
 } from 'lucide-react';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, FileText, CheckCircle2, AlertCircle } from 'lucide-react';
+import { X, FileText } from 'lucide-react';
 
 interface TermsOfServiceModalProps {
   isOpen: boolean;

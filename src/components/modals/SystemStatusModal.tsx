@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Activity, CheckCircle2, ShieldCheck, Server, Cpu, RefreshCw, Zap } from 'lucide-react';
+import { X, Activity, CheckCircle2, ShieldCheck, Server, Cpu, Zap } from 'lucide-react';
 
 interface SystemStatusModalProps {
   isOpen: boolean;

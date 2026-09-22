@@ -8,10 +8,6 @@ import {
   Save,
   Upload,
   Camera,
-  Languages,
-  CheckCircle2,
-  KeyRound,
-  Sparkles,
 } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { useAuth } from '../context/AuthContext';
